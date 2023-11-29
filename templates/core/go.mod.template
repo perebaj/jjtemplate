@@ -1,0 +1,3 @@
+module github.com/perebaj/{{.Name}}
+
+go 1.21.4
