@@ -10,10 +10,22 @@ Create your project with the energetic beats of Brazilian funk.
 
 ## Parameters
 
+To see the avaiable commands
+
 ```bash
-go run main.go --name <project name> --registry <docker registry> --output <output>"
+    go run github.com/perebaj/jjtemplate@latest --help
+```
+
+To run the project
+
+```bash
+    go run github.com/perebaj/jjtemplate@latest --name jjisawesome --registry perebaj
 ```
 
 * **name(Required)**: Set up here the name of your new project. 
 * **registry**: Docker all the way. **Default**: `FAKEREGISTRY`
 * **output**: Pass the folder where you need to save your things. **Default**: `./`
+
+# Usage example
+
+[![asciicast](https://asciinema.org/a/N8X7IyzrTkzVsUF5YYwoda64k.svg)](https://asciinema.org/a/N8X7IyzrTkzVsUF5YYwoda64k)
