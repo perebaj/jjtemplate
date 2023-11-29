@@ -59,13 +59,13 @@ func main() {
 		if d.IsDir() {
 			log.Println("Creating directory", outputPath)
 
-			err := os.MkdirAll(outputPath, 0755)
+			err := os.MkdirAll(outputPath, 0777)
 			if err != nil {
 				log.Fatalf("failed creating directory: %s", err)
 			}
 		} else {
 			log.Println("Creating file", outputPath)
-			data, err := os.ReadFile("./" + path)
+			data, err := fs.ReadFile(templatesDir, path)
 			if err != nil {
 				log.Fatalf("failed reading data from file: %s", err)
 			}
