@@ -10,7 +10,7 @@ Create your project with the energetic beats of Brazilian funk.
 
 ## Parameters
 
-To see the avaiable commands
+To see the available commands
 
 ```bash
     go run github.com/perebaj/jjtemplate@latest --help
@@ -22,9 +22,9 @@ To run the project
     go run github.com/perebaj/jjtemplate@latest --name jjisawesome --registry perebaj
 ```
 
-* **name(Required)**: Set up here the name of your new project. 
-* **registry**: Docker all the way. **Default**: `FAKEREGISTRY`
-* **output**: Pass the folder where you need to save your things. **Default**: `./`
+* **name(required)**: Set up here the name of your new project. 
+* **registry**: Docker all the way. **Default**: `fakeregistry`
+* **output**: Set up the folder where you need to save your things. **Default**: `./`
 
 # Usage example
 
