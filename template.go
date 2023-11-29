@@ -24,7 +24,7 @@ type Project struct {
 func main() {
 
 	projectName := flag.String("name", "", "Project name")
-	registryName := flag.String("registry", "FAKEREGISTRY", "Registry name")
+	registryName := flag.String("registry", "fakeregistry", "Registry name")
 	output := flag.String("output", ".", "Output directory")
 	flag.Parse()
 

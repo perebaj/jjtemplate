@@ -23,7 +23,7 @@ To run the project
 ```
 
 * **name(required)**: Set up here the name of your new project. 
-* **registry**: Docker all the way. **Default**: `FAKEREGISTRY`
+* **registry**: Docker all the way. **Default**: `fakeregistry`
 * **output**: Set up the folder where you need to save your things. **Default**: `./`
 
 # Usage example
