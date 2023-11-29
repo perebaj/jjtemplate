@@ -8,7 +8,7 @@ version=$(shell git rev-parse --short HEAD)
 ## run isolated tests
 .PHONY: test
 test:
-	go test ./... -timeout 10s -race -shuffle on
+	go test ./... -timeout 10s -race
 
 ## builds the service
 .PHONY: service
