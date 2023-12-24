@@ -29,3 +29,9 @@ To run the project
 # Usage example
 
 [![asciicast](https://asciinema.org/a/N8X7IyzrTkzVsUF5YYwoda64k.svg)](https://asciinema.org/a/N8X7IyzrTkzVsUF5YYwoda64k)
+
+# Run tests
+
+`make test`
+
+then you can access the output folder and run the make commands to verify if all it's working well
