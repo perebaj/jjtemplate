@@ -28,7 +28,7 @@ To run the project
 
 # Usage example
 
-[![asciicast](https://asciinema.org/a/N8X7IyzrTkzVsUF5YYwoda64k.svg)](https://asciinema.org/a/N8X7IyzrTkzVsUF5YYwoda64k)
+[![asciicast](https://asciinema.org/a/tPNMTcoPLqsAyf3VWjUjsbyty.svg)](https://asciinema.org/a/tPNMTcoPLqsAyf3VWjUjsbyty)
 
 # Run tests
 
