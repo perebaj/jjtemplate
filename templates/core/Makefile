@@ -12,10 +12,14 @@ devrun=docker run --rm \
 image={{.Registry}}
 version=$(shell git rev-parse --short HEAD)
 
-## run isolated tests
+## run all tests. Usage `make test` or `make test testcase="TestFunctionName"` to run an isolated tests
 .PHONY: test
 test:
-	go test ./... -timeout 10s -race
+	if [ -n "$(testcase)" ]; then \
+		go test ./... -timeout 10s -race -run="^$(testcase)$$" -v; \
+	else \
+		go test ./... -timeout 10s -race; \
+	fi
 
 ## builds the service
 .PHONY: service

@@ -1,5 +1,4 @@
-// Initial code for {{.Name}}.
-
+// Package main is the initial point for the service {{.Name}}.
 package main
 
 import "fmt"
