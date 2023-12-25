@@ -12,7 +12,7 @@ devrun=docker run --rm \
 image={{.Registry}}
 version=$(shell git rev-parse --short HEAD)
 
-## un all tests. Usage `make test` or `make test testcase="TestFunctionName"` to run an isolated tests
+## run all tests. Usage `make test` or `make test testcase="TestFunctionName"` to run an isolated tests
 .PHONY: test
 test:
 	if [ -n "$(testcase)" ]; then \
