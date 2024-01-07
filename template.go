@@ -11,9 +11,6 @@ import (
 	"text/template"
 )
 
-// //go:embed templates/core/*
-// var templatesDir embed.FS
-
 type Project struct {
 	Name     string
 	Registry string
@@ -44,7 +41,6 @@ func main() {
 	}
 
 	if *compose {
-		templateDir := "."
 		templatesDir := os.DirFS("templates/compose")
 		err = walkProject(templatesDir, templateDir, project, output)
 		if err != nil {
