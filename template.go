@@ -2,8 +2,8 @@ package main
 
 import (
 	"bytes"
-	"embed"
 	"flag"
+	"fmt"
 	"io/fs"
 	"log"
 	"os"
@@ -11,10 +11,8 @@ import (
 	"text/template"
 )
 
-//go:embed templates/core/*
-var templatesDir embed.FS
-
-const templateDir = "templates/core"
+// //go:embed templates/core/*
+// var templatesDir embed.FS
 
 type Project struct {
 	Name     string
@@ -25,6 +23,7 @@ func main() {
 
 	projectName := flag.String("name", "", "Project name")
 	registryName := flag.String("registry", "fakeregistry", "Registry name")
+	compose := flag.Bool("compose", false, "Generate docker-compose.yml")
 	output := flag.String("output", ".", "Output directory")
 	flag.Parse()
 
@@ -36,9 +35,28 @@ func main() {
 	project.Name = *projectName
 	project.Registry = *registryName
 
-	fs.WalkDir(templatesDir, templateDir, func(path string, d fs.DirEntry, err error) error {
+	templateDir := "."
+	templatesDir := os.DirFS("templates/core")
+	err := walkProject(templatesDir, templateDir, project, output)
+
+	if err != nil {
+		log.Fatal("failed walking directory", err)
+	}
+
+	if *compose {
+		templateDir := "."
+		templatesDir := os.DirFS("templates/compose")
+		err = walkProject(templatesDir, templateDir, project, output)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("failed walking directory", err)
+		}
+	}
+}
+
+func walkProject(templatesDir fs.FS, templateDir string, project Project, output *string) error {
+	err := fs.WalkDir(templatesDir, templateDir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return fmt.Errorf("failed walking directory %v", err)
 		}
 		if path == templateDir {
 			return nil
@@ -51,7 +69,7 @@ func main() {
 		var buf bytes.Buffer
 		err = template1.Execute(&buf, project)
 		if err != nil {
-			log.Fatalf("failed executing template: %s", err)
+			return fmt.Errorf("failed executing template: %v", err)
 		}
 
 		outputPath := *output + "/" + buf.String()
@@ -61,27 +79,28 @@ func main() {
 
 			err := os.MkdirAll(outputPath, 0777)
 			if err != nil {
-				log.Fatalf("failed creating directory: %s", err)
+				return fmt.Errorf("failed creating directory: %v", err)
 			}
 		} else {
 			log.Println("Creating file", outputPath)
 			data, err := fs.ReadFile(templatesDir, path)
 			if err != nil {
-				log.Fatalf("failed reading data from file: %s", err)
+				return fmt.Errorf("failed reading data from file: %v", err)
 			}
 
 			template2 := template.Must(template.New("file").Parse(string(data)))
 			var result bytes.Buffer
 			err = template2.Execute(&result, project)
 			if err != nil {
-				log.Fatalf("failed executing template: %s", err)
+				return fmt.Errorf("failed executing template: %v", err)
 			}
 			err = os.WriteFile(outputPath, result.Bytes(), 0644)
 			if err != nil {
-				log.Fatalf("failed writing data to file: %s", err)
+				return fmt.Errorf("failed writing data to file: %v", err)
 			}
 		}
 
 		return nil
 	})
+	return err
 }

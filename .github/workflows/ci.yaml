@@ -16,3 +16,6 @@ jobs:
 
       - name: Testing
         run: make test
+
+      - name: Compose Testing
+        run: make test-compose
