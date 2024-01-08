@@ -37,17 +37,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	templatesDir := os.DirFS(home + "/template/templates")
-	templateDir := "core"
-	err = walkProject(templatesDir, templateDir, project, output)
+	templatesDir := os.DirFS(home + "/template/templates/core")
+	err = walkProject(templatesDir, ".", project, output)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if *compose {
-		templateDir := "compose"
-		err = walkProject(templatesDir, templateDir, project, output)
+		templatesDir = os.DirFS(home + "/template/templates/compose")
+		err = walkProject(templatesDir, ".", project, output)
 		if err != nil {
 			log.Fatal(err)
 		}
