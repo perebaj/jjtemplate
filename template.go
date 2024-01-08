@@ -36,7 +36,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(home)
 
 	templatesDir := os.DirFS(home + "/template/templates")
 	templateDir := "core"
@@ -50,7 +49,7 @@ func main() {
 		templateDir := "compose"
 		err = walkProject(templatesDir, templateDir, project, output)
 		if err != nil {
-			log.Fatal("failed walking directory", err)
+			log.Fatal(err)
 		}
 	}
 }
