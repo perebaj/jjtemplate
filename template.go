@@ -36,6 +36,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(home)
 
 	templatesDir := os.DirFS(home + "/template/templates")
 	templateDir := "core"
