@@ -32,19 +32,23 @@ func main() {
 	project.Name = *projectName
 	project.Registry = *registryName
 
-	templateDir := "."
-	templatesDir := os.DirFS("templates/core")
-	err := walkProject(templatesDir, templateDir, project, output)
+	home, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	templatesDir := os.DirFS(home + "/jjtemplate/templates/core")
+	err = walkProject(templatesDir, ".", project, output)
 
 	if err != nil {
-		log.Fatal("failed walking directory", err)
+		log.Fatal(err)
 	}
 
 	if *compose {
-		templatesDir := os.DirFS("templates/compose")
-		err = walkProject(templatesDir, templateDir, project, output)
+		templatesDir = os.DirFS(home + "/jjtemplate/templates/compose")
+		err = walkProject(templatesDir, ".", project, output)
 		if err != nil {
-			log.Fatal("failed walking directory", err)
+			log.Fatal(err)
 		}
 	}
 }
