@@ -37,16 +37,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	templatesDir := os.DirFS(home + "/jjtemplate/templates/")
-	err = walkProject(templatesDir, "core", project, output)
+	templatesDir := os.DirFS(home + "/jjtemplate/templates/core")
+	err = walkProject(templatesDir, ".", project, output)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if *compose {
-		templatesDir = os.DirFS(home + "/jjtemplate/templates/")
-		err = walkProject(templatesDir, "compose", project, output)
+		templatesDir = os.DirFS(home + "/jjtemplate/templates/compose")
+		err = walkProject(templatesDir, ".", project, output)
 		if err != nil {
 			log.Fatal(err)
 		}
