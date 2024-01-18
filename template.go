@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"embed"
 	"flag"
 	"fmt"
 	"io/fs"
@@ -15,6 +16,9 @@ type Project struct {
 	Name     string
 	Registry string
 }
+
+//go:embed templates/*
+var templatesDir embed.FS
 
 func main() {
 
@@ -32,19 +36,16 @@ func main() {
 	project.Name = *projectName
 	project.Registry = *registryName
 
-	templateDir := "."
-	templatesDir := os.DirFS("templates/core")
-	err := walkProject(templatesDir, templateDir, project, output)
+	err := walkProject(templatesDir, "templates/core", project, output)
 
 	if err != nil {
-		log.Fatal("failed walking directory", err)
+		log.Fatal(err)
 	}
 
 	if *compose {
-		templatesDir := os.DirFS("templates/compose")
-		err = walkProject(templatesDir, templateDir, project, output)
+		err = walkProject(templatesDir, "templates/compose", project, output)
 		if err != nil {
-			log.Fatal("failed walking directory", err)
+			log.Fatal(err)
 		}
 	}
 }
