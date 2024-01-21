@@ -17,9 +17,20 @@ test:
 		go test ./... -timeout 10s -race; \
 	fi
 
+## Run all tests including the integration tests (requires docker up and running). Usage `make integration-test` or `make integration-test testcase="TestFunctionName"` to run an isolated tests
 .PHONY: integration-test
 integration-test:
-	go test -timeout 5s -tags=integration ./... -v
+	if [ -n "$(testcase)" ]; then \
+		go test ./... -timeout 5s -tags integration -v -run="^$(testcase)$$" ; \
+	else \
+		go test ./... -timeout 5s -tags integration; \
+	fi
+
+## Calculate code coverage
+.PHONY: coverage
+coverage:
+	go test -coverprofile=c.out 
+	go tool cover -html=c.out
 
 ## builds the service
 .PHONY: service
@@ -87,6 +98,11 @@ dev/logs:
 .PHONY: dev/stop
 dev/stop:
 	docker-compose stop
+
+## Dev container cleanup
+.PHONY: dev/cleanup
+dev/cleanup:
+	docker-compose down -v --remove-orphans --rmi all
 
 ## Access the container
 dev:

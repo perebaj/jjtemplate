@@ -21,6 +21,12 @@ test:
 		go test ./... -timeout 10s -race; \
 	fi
 
+## Calculate code coverage
+.PHONY: coverage
+coverage:
+	go test -coverprofile=c.out 
+	go tool cover -html=c.out
+
 ## builds the service
 .PHONY: service
 service:
