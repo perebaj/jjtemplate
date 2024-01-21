@@ -24,7 +24,7 @@ test:
 ## Calculate code coverage
 .PHONY: coverage
 coverage:
-	go test -coverprofile=c.out 
+	go test ./... -coverprofile=c.out 
 	go tool cover -html=c.out
 
 ## builds the service
