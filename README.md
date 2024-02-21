@@ -1,12 +1,6 @@
-# Template 
+# Template
 
-Create your project with the energetic beats of Brazilian funk.
-
-
-![](assets/ghostemane.gif)
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4wx6DK2qWpuue5fRB27qyz?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-
+Create your project with one command
 
 ## Parameters
 
@@ -22,7 +16,7 @@ To run the project
     go run github.com/perebaj/jjtemplate@latest --name jjisawesome --registry perebaj
 ```
 
-* **name(required)**: Set up here the name of your new project. 
+* **name(required)**: Set up here the name of your new project.
 * **registry**: Docker all the way. **Default**: `fakeregistry`
 * **output**: Set up the folder where you need to save your things. **Default**: `./`
 * **compose**: Set up if you need to generate a docker-compose.yml file. **Default**: `false`
