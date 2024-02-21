@@ -2,6 +2,8 @@
 
 Create your project with one command
 
+![](assets/ghostemane.gif)
+
 ## Parameters
 
 To see the available commands
